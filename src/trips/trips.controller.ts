@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { TripsService } from './trips.service';
 import { CreateTripDto } from './dto/create-trip.dto';
@@ -32,19 +33,22 @@ export class TripsController {
 
   @Get(':id')
   @ApiOkResponse({ type: TripEntity })
-  findOne(@Param('id') id: string) {
-    return this.tripsService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.tripsService.findOne(id);
   }
 
   @Patch(':id')
   @ApiOkResponse({ type: TripEntity })
-  update(@Param('id') id: string, @Body() updateTripDto: UpdateTripDto) {
-    return this.tripsService.update(+id, updateTripDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateTripDto: UpdateTripDto,
+  ) {
+    return this.tripsService.update(id, updateTripDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: TripEntity })
-  remove(@Param('id') id: string) {
-    return this.tripsService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.tripsService.remove(id);
   }
 }
