@@ -7,22 +7,25 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class TripsService {
   constructor(private prisma: PrismaService) {}
   create(createTripDto: CreateTripDto) {
-    return 'This action adds a new trip';
+    return this.prisma.trip.create({ data: createTripDto });
   }
 
   findAll() {
-    return this.prisma.trip.findMany()
+    return this.prisma.trip.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} trip`;
+    return this.prisma.trip.findUnique({ where: { id } });
   }
 
   update(id: number, updateTripDto: UpdateTripDto) {
-    return `This action updates a #${id} trip`;
+    return this.prisma.trip.update({
+      where: { id },
+      data: updateTripDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} trip`;
+    return this.prisma.trip.delete({ where: { id } });
   }
 }
