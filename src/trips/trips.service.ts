@@ -15,7 +15,12 @@ export class TripsService {
   }
 
   findOne(id: number) {
-    return this.prisma.trip.findUnique({ where: { id } });
+    return this.prisma.trip.findUnique({
+      where: { id },
+      include: {
+        createdBy: true,
+      },
+    });
   }
 
   update(id: number, updateTripDto: UpdateTripDto) {

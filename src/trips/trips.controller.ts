@@ -22,14 +22,15 @@ export class TripsController {
 
   @Post()
   @ApiCreatedResponse({ type: TripEntity })
-  create(@Body() createTripDto: CreateTripDto) {
-    return this.tripsService.create(createTripDto);
+  async create(@Body() createTripDto: CreateTripDto) {
+    return new TripEntity(await this.tripsService.create(createTripDto));
   }
 
   @Get()
   @ApiOkResponse({ type: TripEntity, isArray: true })
-  findAll() {
-    return this.tripsService.findAll();
+  async findAll() {
+    const trips = await this.tripsService.findAll();
+    return trips.map((trip) => new TripEntity(trip));
   }
 
   @Get(':id')
@@ -39,22 +40,21 @@ export class TripsController {
     if (!trip) {
       throw new NotFoundException(`Trip with ID ${id} does not exist.`);
     }
-
-    return trip;
+    return new TripEntity(trip);
   }
 
   @Patch(':id')
   @ApiOkResponse({ type: TripEntity })
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateTripDto: UpdateTripDto,
   ) {
-    return this.tripsService.update(id, updateTripDto);
+    return new TripEntity(await this.tripsService.update(id, updateTripDto));
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: TripEntity })
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.tripsService.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return new TripEntity(await this.tripsService.remove(id));
   }
 }
