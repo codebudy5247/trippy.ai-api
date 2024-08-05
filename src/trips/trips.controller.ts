@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  NotFoundException,
   ParseIntPipe,
 } from '@nestjs/common';
 import { TripsService } from './trips.service';
@@ -33,8 +34,13 @@ export class TripsController {
 
   @Get(':id')
   @ApiOkResponse({ type: TripEntity })
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.tripsService.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const trip = await this.tripsService.findOne(id);
+    if (!trip) {
+      throw new NotFoundException(`Trip with ID ${id} does not exist.`);
+    }
+
+    return trip;
   }
 
   @Patch(':id')
