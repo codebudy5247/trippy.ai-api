@@ -4,7 +4,7 @@ import { Trip } from '@prisma/client';
 export class TripEntity implements Trip {
   @ApiProperty()
   id: number;
-    
+
   @ApiProperty()
   title: string;
 
@@ -13,4 +13,7 @@ export class TripEntity implements Trip {
 
   @ApiProperty()
   updatedAt: Date;
+
+  @ApiProperty({ required: false, nullable: true })
+  createdById: string | null;
 }
