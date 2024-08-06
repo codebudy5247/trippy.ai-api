@@ -11,6 +11,5 @@ export class CreateTripDto {
   @IsNotEmpty()
   @MinLength(5)
   @ApiProperty()
-  @ApiProperty()
   title: string;
 }

@@ -6,12 +6,21 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class TripsService {
   constructor(private prisma: PrismaService) {}
-  create(createTripDto: CreateTripDto) {
-    return this.prisma.trip.create({ data: createTripDto });
+  create(createTripDto: CreateTripDto,userId: string) {
+    return this.prisma.trip.create({ 
+      data: {
+        ...createTripDto,
+        createdById: userId
+      }
+     });
   }
 
-  findAll() {
-    return this.prisma.trip.findMany();
+  findAll(userId: string) {
+    return this.prisma.trip.findMany({
+        where:{
+          createdById:userId
+        }
+    });
   }
 
   findOne(id: number) {
