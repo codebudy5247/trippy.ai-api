@@ -10,22 +10,31 @@ export class TripEntity implements Trip {
   title: string;
 
   @ApiProperty()
+  coverImage: string;
+
+  @ApiProperty()
+  startDate: Date;
+
+  @ApiProperty()
+  endDate: Date;
+
+  @ApiProperty()
   createdAt: Date;
 
   @ApiProperty()
   updatedAt: Date;
 
   @ApiProperty({ required: false, nullable: true })
-  createdById: string | null;
+  ownerId: string | null;
 
   @ApiProperty({ required: false, type: UserEntity })
-  createdBy?: UserEntity;
+  owner: UserEntity;
 
-  constructor({ createdBy, ...data }: Partial<TripEntity>) {
+  constructor({ owner, ...data }: Partial<TripEntity>) {
     Object.assign(this, data);
 
-    if (createdBy) {
-      this.createdBy = new UserEntity(createdBy);
+    if (owner) {
+      this.owner = new UserEntity(owner);
     }
   }
 }

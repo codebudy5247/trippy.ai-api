@@ -10,7 +10,7 @@ export class TripsService {
     return this.prisma.trip.create({ 
       data: {
         ...createTripDto,
-        createdById: userId
+        ownerId: userId
       }
      });
   }
@@ -18,7 +18,7 @@ export class TripsService {
   findAll(userId: string) {
     return this.prisma.trip.findMany({
         where:{
-          createdById:userId
+          ownerId:userId
         }
     });
   }
@@ -27,7 +27,7 @@ export class TripsService {
     return this.prisma.trip.findUnique({
       where: { id },
       include: {
-        createdBy: true,
+        owner: true,
       },
     });
   }
