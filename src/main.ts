@@ -14,6 +14,7 @@ async function bootstrap() {
     .setTitle('Trippy.ai')
     .setDescription('The Trippy.ai API description')
     .setVersion('0.1')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
