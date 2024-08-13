@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsString, IsOptional, IsDate } from 'class-validator';
 
 export class CreateTripDto {
   @IsString()
@@ -14,29 +15,17 @@ export class CreateTripDto {
   @ApiProperty()
   coverImage: string;
 
-  @IsString()
+  @IsDate()
+  @Type(() => Date)
   @IsOptional()
   // @IsNotEmpty()
   @ApiProperty()
-  startDate: string;
+  startDate: Date;
 
-  @IsString()
+  @IsDate()
+  @Type(() => Date)
   @IsOptional()
   // @IsNotEmpty()
   @ApiProperty()
-  endDate: string;
-
-  // @IsDate()
-  // @Type(() => Date)
-  // @IsOptional()
-  // @IsNotEmpty()
-  // @ApiProperty()
-  // startDate: Date;
-
-  // @IsDate()
-  // @Type(() => Date)
-  // @IsOptional()
-  // @IsNotEmpty()
-  // @ApiProperty()
-  // endDate: Date;
+  endDate: Date;
 }

@@ -21,8 +21,8 @@ model Trip {
   id         Int        @id @default(autoincrement())
   title      String
   coverImage String
-  startDate  String
-  endDate    String
+  startDate  DateTime
+  endDate    DateTime
   owner      User       @relation(fields: [ownerId], references: [id])
   ownerId    String
   createdAt  DateTime   @default(now())
