@@ -13,10 +13,10 @@ export class TripEntity implements Trip {
   coverImage: string;
 
   @ApiProperty()
-  startDate: Date;
+  startDate: string;
 
   @ApiProperty()
-  endDate: Date;
+  endDate: string;
 
   @ApiProperty()
   createdAt: Date;

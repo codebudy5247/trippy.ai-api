@@ -1,29 +1,42 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, MinLength, IsDate } from 'class-validator';
-import { Type } from 'class-transformer';
-
+import { IsString, IsOptional } from 'class-validator';
 
 export class CreateTripDto {
   @IsString()
-  @IsNotEmpty()
-  @MinLength(3)
+  @IsOptional()
+  // @IsNotEmpty()
   @ApiProperty()
   title: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
+  // @IsNotEmpty()
   @ApiProperty()
   coverImage: string;
 
-  @IsDate()
-  @Type(() => Date)
-  @IsNotEmpty()
+  @IsString()
+  @IsOptional()
+  // @IsNotEmpty()
   @ApiProperty()
-  startDate: Date;
+  startDate: string;
 
-  @IsDate()
-  @Type(() => Date)
-  @IsNotEmpty()
+  @IsString()
+  @IsOptional()
+  // @IsNotEmpty()
   @ApiProperty()
-  endDate: Date;
+  endDate: string;
+
+  // @IsDate()
+  // @Type(() => Date)
+  // @IsOptional()
+  // @IsNotEmpty()
+  // @ApiProperty()
+  // startDate: Date;
+
+  // @IsDate()
+  // @Type(() => Date)
+  // @IsOptional()
+  // @IsNotEmpty()
+  // @ApiProperty()
+  // endDate: Date;
 }
